@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>عملة فلسطين – FALASTIN COIN</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(to bottom, #0f2027, #203a43, #2c5364);
+      color: #e0e0e0;
+      text-align: center;
+      padding: 20px;
+    }
+    header {
+      background: #0f0f0f;
+      padding: 30px;
+      border-bottom: 3px solid #00ff88;
+    }
+    header h1 {
+      color: #00ff99;
+      font-size: 3em;
+    }
+    .tagline {
+      font-size: 1.2em;
+      color: #00ff88;
+      margin-top: 10px;
+    }
+    section {
+      margin: 50px 0;
+    }
+    button {
+      padding: 12px 24px;
+      margin: 10px;
+      background-color: #00ff99;
+      color: #000;
+      border: none;
+      border-radius: 6px;
+      font-size: 1em;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #00cc77;
+    }
+    footer {
+      margin-top: 50px;
+      font-size: 0.8em;
+      color: #aaa;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>FALASTIN COIN</h1>
+    <p class="tagline">عملة الحرية والدعم لقضيتنا العادلة</p>
+  </header>
+
+  <section>
+    <h2>🔰 لماذا فلسطين؟</h2>
+    <p>عملة رقمية تهدف إلى دعم الوعي العالمي بالقضية الفلسطينية وتعزيز روح التضامن.</p>
+  </section>
+
+  <section>
+    <h2>🗺️ خارطة الطريق</h2>
+    <ul>
+      <li>✅ إطلاق العملة على شبكة BSC</li>
+      <li>✅ إنشاء الموقع الرسمي</li>
+      <li>📢 حملة ترويجية واسعة على السوشيال ميديا</li>
+      <li>🪙 إدراج العملة في PancakeSwap</li>
+      <li>🤝 شراكات مع مؤثرين ومنصات عربية</li>
+      <li>🌍 بناء مجتمع حقيقي من الداعمين</li>
+    </ul>
+  </section>
+
+  <section id="buy">
+    <h2>💰 اشترِ عملة FALASTIN</h2>
+    <p>ادعم القضية واشترِ العملة بسهولة عبر MetaMask.</p>
+
+    <p><strong>📜 عنوان العقد:</strong>
+      <span id="tokenAddress">0x1234567890ABCDEF1234567890ABCDEF12345678</span>
+    </p>
+
+    <button onclick="connectWallet()">🔗 ربط المحفظة</button>
+    <button onclick="buyToken()">🚀 اشترِ الآن</button>
+
+    <p id="status"></p>
+  </section>
+
+  <footer>
+    <p>© 2025 FALASTIN Coin. جميع الحقوق محفوظة.</p>
+  </footer>
+
+  <script>
+    let userAddress = null;
+
+    async function connectWallet() {
+      if (window.ethereum) {
+        try {
+          const accounts = await ethereum.request({ method: 'eth_requestAccounts' });
+          userAddress = accounts[0];
+          document.getElementById("status").innerText = "✅ تم ربط المحفظة: " + userAddress;
+        } catch (err) {
+          document.getElementById("status").innerText = "❌ لم يتم ربط المحفظة.";
+        }
+      } else {
+        alert("يرجى تثبيت MetaMask أولًا.");
+      }
+    }
+
+    async function buyToken() {
+      if (!userAddress) {
+        alert("🔗 يرجى ربط المحفظة أولاً.");
+        return;
+      }
+
+      const txParams = {
+        to: "0x1234567890ABCDEF1234567890ABCDEF12345678",
+        from: userAddress,
+        value: "0x2386F26FC10000", // 0.01 ETH
+      };
+
+      try {
+        const txHash = await ethereum.request({
+          method: 'eth_sendTransaction',
+          params: [txParams],
+        });
+        document.getElementById("status").innerText = "✅ تم إرسال المعاملة: " + txHash;
+      } catch (error) {
+        document.getElementById("status").innerText = "❌ فشل في إرسال المعاملة.";
+      }
+    }
+  </script>
+</body>
+</html>
